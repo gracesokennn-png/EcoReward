@@ -3,20 +3,31 @@ name = 'EcoReward'
 description = ''
 authors = []
 telemetry = true
-cache_dir = '.\.cache'
+cache_dir = '.\\.cache'
 requirements = []
+
 [contracts.EcoRewardcontract]
 path = 'contracts/EcoRewardcontract.clar'
 clarity_version = 3
 epoch = 'latest'
+
 [repl.analysis]
-passes = ['check_checker']
+passes = []
+
+[repl.analysis.linter]
+enabled = false
 
 [repl.analysis.check_checker]
 strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
+
+[repl.analysis.allowed_functions]
+functions = ["block-height"]
+
+[repl.analysis.block_height]
+enabled = true
 
 [repl.remote_data]
 enabled = false
