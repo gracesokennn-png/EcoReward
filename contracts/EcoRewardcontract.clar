@@ -60,6 +60,8 @@
 (define-data-var token-decimals uint u6)
 (define-data-var total-actions-completed uint u0)
 (define-data-var contract-enabled bool true)
+(define-data-var current-timestamp uint u1)
+(define-data-var next-action-id uint u1)
 
 ;; data maps
 ;; User balances and activity tracking
@@ -109,9 +111,6 @@
     submitted-at: uint
   }
 )
-
-;; Global action counter
-(define-data-var next-action-id uint u1)
 
 ;; public functions
 
@@ -164,7 +163,7 @@
       { user: tx-sender, action-id: action-id }
       {
         action-type: action-type,
-        timestamp: block-height,
+        timestamp: (var-get current-timestamp),
         location-hash: location-hash,
         proof-hash: proof-hash,
         verified: false,
@@ -178,12 +177,13 @@
       {
         user: tx-sender,
         verifier: none,
-        submitted-at: block-height
+        submitted-at: (var-get current-timestamp)
       }
     )
     
     ;; Increment action ID
     (var-set next-action-id (+ action-id u1))
+    (var-set current-timestamp (+ (var-get current-timestamp) u1))
     
     (ok action-id)
   )
