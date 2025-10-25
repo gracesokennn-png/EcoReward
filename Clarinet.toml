@@ -9,7 +9,7 @@ requirements = []
 [contracts.EcoRewardcontract]
 path = 'contracts/EcoRewardcontract.clar'
 clarity_version = 3
-epoch = 'latest'
+epoch = 3.0
 
 [repl.analysis]
 passes = []
@@ -22,9 +22,6 @@ strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
-
-[repl.analysis.allowed_functions]
-functions = ["block-height"]
 
 [repl.analysis.block_height]
 enabled = true
